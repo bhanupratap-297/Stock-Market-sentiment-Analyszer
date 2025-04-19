@@ -37,7 +37,7 @@ if data.get("status") != "ok":
 articles = data["articles"]
 print(f"Fetched {len(articles)} news articles for {company_name}.\n")
 
-# === PERFORM SENTIMENT ANALYSIS ===
+# PERFORM SENTIMENT ANALYSIS
 positive, negative, neutral = 0, 0, 0
 rows = []
 
@@ -60,13 +60,13 @@ for article in articles[:10]:
     print(f"[{sentiment_label}] {headline}")
     rows.append({"Headline": headline, "Sentiment": sentiment_label, "Score": sentiment_score})
 
-# === SAVE SENTIMENT TO CSV ===
+#------
 df = pd.DataFrame(rows)
 csv_filename = f"{ticker}_news_sentiment.csv"
 df.to_csv(csv_filename, index=False)
 print(f"\nSaved sentiment results to {csv_filename}")
 
-# === VISUALIZE SENTIMENT RESULTS ===
+# === MATPLOTLIB ===
 labels = ['Positive', 'Negative', 'Neutral']
 counts = [positive, negative, neutral]
 colors = ['green', 'red', 'gray']
@@ -79,7 +79,7 @@ plt.xlabel("Sentiment")
 plt.tight_layout()
 plt.show()
 
-# === FETCH AND PLOT STOCK DATA ===
+# === FETCH STOCK DATA ===
 print(f"\nFetching stock price data for {ticker} from {start_date} to {end_date}...")
 
 stock_data = yf.download(ticker, start=start_date, end=end_date)
